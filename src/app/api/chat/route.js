@@ -1,8 +1,6 @@
 import { HfInference } from '@huggingface/inference';
 
-export const config = {
-  runtime: 'edge',
-};
+export const runtime = "edge";
 
 export async function POST(req) {
   const { message } = await req.json();
