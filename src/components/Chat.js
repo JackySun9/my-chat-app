@@ -36,7 +36,7 @@ const Chat = () => {
   };
 
   const fetchResponseFromAI = async (message) => {
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
