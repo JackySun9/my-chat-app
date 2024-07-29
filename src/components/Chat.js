@@ -26,12 +26,8 @@ const Chat = () => {
     const userMessage = { sender: 'user', text: input };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-    // Fetch response from the AI model
-    const response = await fetchResponseFromAI(input);
-    const formattedResponse = formatResponse(response);
-    const aiMessage = { sender: 'ai', text: formattedResponse };
-
-    setMessages((prevMessages) => [...prevMessages, userMessage, aiMessage]);
+    // Fetch response from the AI model using streaming
+    await fetchResponseFromAI(input);
     setInput('');
   };
 
@@ -44,14 +40,24 @@ const Chat = () => {
       body: JSON.stringify({ message }),
     });
 
-    const data = await response.json();
-    return data.response;
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let aiMessage = { sender: 'ai', text: '' };
+    let aggregatedText = '';
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const decodedText = decoder.decode(value, { stream: true });
+      aggregatedText += formatResponse(decodedText);
+      aiMessage.text = aggregatedText;
+      setMessages((prevMessages) => [...prevMessages.slice(0, -1), aiMessage]);
+    }
   };
 
-  // Utility function to format AI response
   const formatResponse = (response) => {
-    // Custom formatting logic (e.g., adding new lines)
-    return response.split('. ').join('.\n');
+    // Split the response on key-value separator and join the values
+    return response.split('"').filter((_, index) => index % 2 !== 0).join('');
   };
 
   const handleKeyDown = (event) => {

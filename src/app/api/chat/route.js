@@ -1,22 +1,21 @@
+import { HuggingFaceStream, StreamingTextResponse } from 'ai';
 import { HfInference } from '@huggingface/inference';
 
-export const runtime = "edge";
+const hf = new HfInference(process.env.HUGGING_FACE_API_KEY);
 
 export async function POST(req) {
   const { message } = await req.json();
 
-  const hf = new HfInference(process.env.HUGGING_FACE_API_KEY);
-
-  const response = await hf.textGeneration({
+  // Start the streaming response from Hugging Face
+  const response = hf.textGenerationStream({
     model: 'mistralai/Mistral-Nemo-Instruct-2407',
     inputs: message,
     parameters: { max_new_tokens: 2000 },
   });
 
-  return new Response(JSON.stringify({ response: response.generated_text }), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  // Convert the response into a friendly text stream
+  const stream = HuggingFaceStream(response);
+
+  // Respond with the stream
+  return new StreamingTextResponse(stream);
 }
