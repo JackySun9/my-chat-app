@@ -39,8 +39,8 @@ The client-side chatbot component located in `app/components/Chat.js` handles us
 Make sure to add your Hugging Face API key and the API URL to the environment variables by creating a `.env.local` file in the root of your project:
 
 ```env
-HUGGING_FACE_API_KEY=your_huggingface_api_key
-NEXT_PUBLIC_API_URL=your_api_url
+HUGGING_FACE_API_KEY=hf_xxxxxx
+NEXT_PUBLIC_API_URL=http://localhost:3000/api/chat
 ```
 
 ## Learn More
