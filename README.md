@@ -58,5 +58,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 ```
-
-This markdown version of the README includes all necessary instructions for setting up and running the project, including environment variables for `HUGGING_FACE_API_KEY` and `NEXT_PUBLIC_API_URL`.
