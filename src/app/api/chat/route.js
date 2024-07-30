@@ -9,7 +9,8 @@ export async function POST(req) {
   const headers = new Headers({
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive'
+    'Connection': 'keep-alive',
+    'Keep-Alive': 'timeout=5, max=1000',
   });
 
   const response = hf.textGenerationStream({
@@ -21,5 +22,5 @@ export async function POST(req) {
   const stream = HuggingFaceStream(response);
 
   // Respond with the stream
-  return new StreamingTextResponse(stream);
+  return new StreamingTextResponse(stream, { headers });
 }

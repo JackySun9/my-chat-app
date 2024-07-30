@@ -14,6 +14,10 @@
           {
             "key": "Connection", 
             "value": "keep-alive"
+          },
+          {
+            "key": "Keep-Alive", 
+            "value": "timeout=5, max=1000"
           }
         ]
       }
