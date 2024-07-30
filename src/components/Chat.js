@@ -14,6 +14,7 @@ const Chat = () => {
     "meta-llama/Meta-Llama-3.1-70B-Instruct",
     "meta-llama/Meta-Llama-3.1-8B-Instruct",
     "mistralai/Mistral-Nemo-Instruct-2407",
+    "suntomoon/Mistral-Large-Instruct-2407",
   ];
 
   useEffect(() => {
