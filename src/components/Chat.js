@@ -36,11 +36,12 @@ const Chat = () => {
     const inputMessage = input;
     setInput("");
 
-    const allMessages = [...messages, userMessage]
-      .map((msg) => `${msg.sender}: ${msg.text}`)
+    const allUserMessages = [...messages, userMessage]
+      .filter(msg => msg.sender === "user")
+      .map(msg => `${msg.sender}: ${msg.text}`)
       .join("\n");
 
-    await fetchResponseFromAI(allMessages, selectedModel);
+    await fetchResponseFromAI(allUserMessages, selectedModel);
   };
 
   const fetchResponseFromAI = async (message, model) => {
@@ -56,7 +57,6 @@ const Chat = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message, model }),
-      keepalive: true,
     });
 
     const reader = response.body.getReader();
