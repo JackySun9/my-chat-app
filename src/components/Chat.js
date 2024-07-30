@@ -15,6 +15,7 @@ const Chat = () => {
   const MESSAGE_LIMIT = 200; // Character limit for displaying "Read More"
 
   const models = [
+    "meta-llama/Meta-Llama-3.1-70B-Instruct",
     "meta-llama/Meta-Llama-3.1-8B-Instruct",
     "mistralai/Mistral-Nemo-Instruct-2407",
   ];
