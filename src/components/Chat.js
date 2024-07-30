@@ -56,6 +56,7 @@ const Chat = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message, model }),
+      keepalive: true,
     });
 
     const reader = response.body.getReader();
