@@ -1,0 +1,21 @@
+{
+    "headers": [
+      {
+        "source": "/api/chat", 
+        "headers": [
+          {
+            "key": "Content-Type", 
+            "value": "text/event-stream"
+          },
+          {
+            "key": "Cache-Control", 
+            "value": "no-cache"
+          },
+          {
+            "key": "Connection", 
+            "value": "keep-alive"
+          }
+        ]
+      }
+    ]
+  }
