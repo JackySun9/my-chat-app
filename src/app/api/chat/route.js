@@ -10,9 +10,9 @@ export async function POST(req) {
   const response = hf.textGenerationStream({
     model: model, // Use the model from the request body
     inputs: message,
-    parameters: { max_new_tokens: 2000 },
+    parameters: { max_new_tokens: 6000 },
   });
-  
+
   // Convert the response into a friendly text stream
   const stream = HuggingFaceStream(response);
 
