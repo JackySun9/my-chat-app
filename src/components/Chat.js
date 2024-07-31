@@ -38,7 +38,6 @@ const Chat = () => {
     setInput("");
 
     const allUserMessages = [...messages, userMessage]
-      .filter(msg => msg.sender === "user")
       .map(msg => `${msg.sender}: ${msg.text}`)
       .join("\n");
 
